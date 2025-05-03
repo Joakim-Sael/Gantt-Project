@@ -4,13 +4,13 @@ import './GanttChart.css'; // We'll create this CSS file
 
 export default function GanttChart() {
   const [taskData, setTaskData] = useState([]);
-  const [displayedGroups, setDisplayedGroups] = useState(['Large Exhibition', 'Small Exhibition 1']);
+  const [displayedGroups, setDisplayedGroups] = useState(['Large Exhibition', 'Small Exhibition 1', 'Small Exhibition 2']);
   const [displayedTeams, setDisplayedTeams] = useState(['Curators', 'Finance', 'Project Management', 'Logistics', 'Marketing', 'Operations']);
   const [visibleTasks, setVisibleTasks] = useState([]);
 
   useEffect(() => {
-    // Original task data from your JSON
     const rawData = [
+      // Large Exhibition 1 (01.03.25 to 01.03.26)
       {
         "task_id": "L1",
         "team": "Curators",
@@ -27,7 +27,7 @@ export default function GanttChart() {
         "task_group": "Large Exhibition",
         "task_description": "Budget Approval & Sponsorships",
         "start_date": "2025-05-01",
-        "end_date": "2025-06-30"
+        "end_date": "2025-06-15"
       },
       {
         "task_id": "L3",
@@ -35,8 +35,8 @@ export default function GanttChart() {
         "dependencies": ["L2"],
         "task_group": "Large Exhibition",
         "task_description": "Stakeholder Engagement & Planning",
-        "start_date": "2025-06-01",
-        "end_date": "2025-08-31"
+        "start_date": "2025-06-16",
+        "end_date": "2025-08-15"
       },
       {
         "task_id": "L4",
@@ -44,8 +44,8 @@ export default function GanttChart() {
         "dependencies": ["L3"],
         "task_group": "Large Exhibition",
         "task_description": "Artist & Exhibit Selection",
-        "start_date": "2025-09-01",
-        "end_date": "2025-11-30"
+        "start_date": "2025-08-16",
+        "end_date": "2025-10-31"
       },
       {
         "task_id": "L5",
@@ -54,7 +54,7 @@ export default function GanttChart() {
         "task_group": "Large Exhibition",
         "task_description": "Venue & Logistics Planning",
         "start_date": "2025-11-01",
-        "end_date": "2026-01-31"
+        "end_date": "2025-12-31"
       },
       {
         "task_id": "L6",
@@ -62,8 +62,8 @@ export default function GanttChart() {
         "dependencies": ["L5"],
         "task_group": "Large Exhibition",
         "task_description": "Marketing & Promotion",
-        "start_date": "2025-12-01",
-        "end_date": "2026-02-28"
+        "start_date": "2026-01-01",
+        "end_date": "2026-02-15"
       },
       {
         "task_id": "L7",
@@ -71,8 +71,8 @@ export default function GanttChart() {
         "dependencies": ["L6"],
         "task_group": "Large Exhibition",
         "task_description": "Final Setup & Staff Training",
-        "start_date": "2026-02-01",
-        "end_date": "2026-03-01"
+        "start_date": "2026-02-16",
+        "end_date": "2026-02-29"
       },
       {
         "task_id": "L8",
@@ -81,8 +81,10 @@ export default function GanttChart() {
         "task_group": "Large Exhibition",
         "task_description": "Exhibition Running",
         "start_date": "2026-03-01",
-        "end_date": "2026-06-30"
+        "end_date": "2026-03-01"
       },
+    
+      // Small Exhibition 1 (01.09.25 to 01.02.26)
       {
         "task_id": "S1-1",
         "team": "Curators",
@@ -90,54 +92,92 @@ export default function GanttChart() {
         "task_group": "Small Exhibition 1",
         "task_description": "Concept Development",
         "start_date": "2025-09-01",
-        "end_date": "2025-10-31"
+        "end_date": "2025-09-30"
       },
       {
         "task_id": "S1-2",
         "team": "Finance",
         "dependencies": ["S1-1"],
         "task_group": "Small Exhibition 1",
-        "task_description": "Budget & Sponsorship Confirmation",
+        "task_description": "Budget & Sponsorship",
         "start_date": "2025-10-01",
-        "end_date": "2025-11-30"
+        "end_date": "2025-10-31"
       },
       {
         "task_id": "S1-3",
         "team": "Curators",
         "dependencies": ["S1-2"],
         "task_group": "Small Exhibition 1",
-        "task_description": "Artist & Content Selection",
+        "task_description": "Content & Artist Selection",
         "start_date": "2025-11-01",
-        "end_date": "2025-12-31"
+        "end_date": "2025-11-30"
       },
       {
         "task_id": "S1-4",
         "team": "Marketing",
         "dependencies": ["S1-3"],
         "task_group": "Small Exhibition 1",
-        "task_description": "Marketing Campaign & Outreach",
+        "task_description": "Promotion & Outreach",
         "start_date": "2025-12-01",
-        "end_date": "2026-01-31"
+        "end_date": "2026-01-15"
       },
       {
         "task_id": "S1-5",
-        "team": "Logistics",
+        "team": "Operations",
         "dependencies": ["S1-4"],
         "task_group": "Small Exhibition 1",
-        "task_description": "Venue Preparation & Setup",
-        "start_date": "2026-01-01",
-        "end_date": "2026-02-28"
+        "task_description": "Exhibition Setup & Launch",
+        "start_date": "2026-01-16",
+        "end_date": "2026-02-01"
+      },
+    
+      // Small Exhibition 2 (Exhibition 3: 01.02.26 to 01.08.26)
+      {
+        "task_id": "S2-1",
+        "team": "Curators",
+        "dependencies": [],
+        "task_group": "Small Exhibition 2",
+        "task_description": "Concept Planning",
+        "start_date": "2026-02-01",
+        "end_date": "2026-03-01"
       },
       {
-        "task_id": "S1-6",
+        "task_id": "S2-2",
+        "team": "Finance",
+        "dependencies": ["S2-1"],
+        "task_group": "Small Exhibition 2",
+        "task_description": "Funding & Logistics Budget",
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-31"
+      },
+      {
+        "task_id": "S2-3",
+        "team": "Curators",
+        "dependencies": ["S2-2"],
+        "task_group": "Small Exhibition 2",
+        "task_description": "Artist Selection & Curation",
+        "start_date": "2026-04-01",
+        "end_date": "2026-05-15"
+      },
+      {
+        "task_id": "S2-4",
+        "team": "Marketing",
+        "dependencies": ["S2-3"],
+        "task_group": "Small Exhibition 2",
+        "task_description": "Outreach & Communications",
+        "start_date": "2026-05-16",
+        "end_date": "2026-06-15"
+      },
+      {
+        "task_id": "S2-5",
         "team": "Operations",
-        "dependencies": ["S1-5"],
-        "task_group": "Small Exhibition 1",
-        "task_description": "Exhibition Running",
-        "start_date": "2026-02-01",
-        "end_date": "2026-05-31"
+        "dependencies": ["S2-4"],
+        "task_group": "Small Exhibition 2",
+        "task_description": "Setup & Launch",
+        "start_date": "2026-06-16",
+        "end_date": "2026-08-01"
       }
-    ];
+    ];    
 
     // Process the data for the chart
     const processedData = rawData.map(task => {
